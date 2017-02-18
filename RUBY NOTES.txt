@@ -1,0 +1,126 @@
+## RUBY NOTES FROM LAUNCH SCHOOL RUBY BASICS BOOK
+# OFFICIAL RUBY DOCUMENTATION
+  - The top word in big text represents the CLASS or MODULE
+    - Under METHODS, :: is used in front of CLASS METHODS
+      - Public class methods are called directly from the class.
+        - ex: b = String.new("blue") => "blue"
+    - Under METHODS, # are used in front of INSTANCE METHODS
+      - Public instance methods can be applied to any instance of the class.
+        - ex: "world wide web".split => ["world", "wide", "web"]
+    - The CLASS/MODULE INDEX list in the OFFICIAL RUBY DOCUMENTATION lists other CLASSES and MODULES that are a part of the same NAMESPACE as the current CLASS. All CLASSES are part of a NAMESPACE in RUBY.
+      - Items with :: in the CLASS/MODULE INDEX represent a NAMESPACE.
+    - INCLUDED MODULES indicate additional MODULES whose functionality is available to the class. In our example the STRING class.
+    - In actual Ruby code, :: is used for namespaces and # is used for comments. So don't get hung up on how these symbols are used in documentation.
+# STRINGS
+  - You can use "" double quotes or '' single quotes with strings. Use \ to escape character. 
+    - ex: "This is a 'string'"
+    - ex: 'Thi is \'a string\''
+  - STRING INTERPOLATION must use "".
+    - ex: "My favorite number is #{a}"
+    - Returns an expression.
+# SYMBOLS
+  - ex: :name, :a_symbol
+# NUMBERS
+  - INTEGERS: whole numbers only. Also called a FIXNUM.
+  - FLOAT: number with a decimal
+  - STRING TO FIXNUM: ex: '12'.to_i
+# NIL
+  - Having nothing or completely empty. When output is expected but none is returned, nil will be printed to the screen.
+    - ex: puts "Hello, World!" => Hello, World! nil
+  - NIL and FALSE are both negative, but they are not equivalent.
+# ARRAY
+  - ARRAY is an ordered list which can be made of STRINGS, INTEGERS, FLOATS, BOOLEANS, or any other data type.
+# HASH
+  - Sometimes referred to as a dictionary. It is a set of key-value pairs.
+    - ex: {:dog => 'barks'}
+      - ex: access value: {:dog => 'barks'}[:dog] returns value.
+# EXPRESSION
+  - EXPRESSION is anything that can be evaluated. RUBY EXPRESSIONS always return a value, even if that value is NIL or an error.
+# VARIABLES
+  - VARIABLE SCOPE in RUBY is based on where a VARIABLE is initialized. VARIABLE SCOPE is defined by a BLOCK. A BLOCK is a piece of code following a METHOD INVOCATION. Usually curly braces or do/end. Not all do/ends imply a BLOCK.
+  - INNER SCOPES can access variables in outer scopes but not vice versa.
+  - BLOCKS create new SCOPE when {} or do/end immediately follows a method invocation. When you use EACH or TIMES
+  and other METHODS followed by {} or do/end then a new BLOCK is created and there's VARIABLE SCOPE.
+    - ex: 
+          for i in arr do
+            a = 5
+          end
+
+          puts a
+
+    - result: puts a = 5 because the FOR loop doesn't have a METHOD.
+  - TYPES OF VARIABLES
+    - CONSTANTS - declared by capitalizing every letter in the variable's name. Used for storing data that never needs to change. CONSTANTS cannot be declared in METHODS, and are available throughout your application's scopes.
+    - GLOBAL VARIABLES - declared with a $. Available throughout the program. Overriding all scope boundaries. Try to stay away from GLOBAL VARIABLES.
+    - CLASS VARIABLES - declared with a @@. Accessible by instances of your class, as well as the class itself. When you need to declare a variable related to a class, but each instance of that CLASS doesn't nedd it's own value for this variable, you use a CLASS VARIABLE. CLASS VARIABLES must be initialized at the CLASS level, outside of any methods. They can be altered using CLASS or INSTANCE METHODS.
+    - INSTANCE VARIABLES - declared with one @. They're available throughout the current instance of the parent class. They can corss some scope boundaries, but not all of them.
+    - LOCAL VARIABLES - most common variables. Obey scope boundaries. DON'T start with $ or @, as well as not capitalizing the entire variable name.
+# METHODS
+  - PARAMETERS - method(parameter) say(parameter)
+  - ARGUMENTS - method(arguments) when calling method
+    - ex: say("hello")
+  - METHODS can't modify arguments passed in to them permanently. The exception is when a method MUTATES the CALLER.
+    - ex: 
+      # number in some_method is unaffected by passed in
+      # argument
+
+      def some_method(number)
+      number = 7 # this is implicitly returned by the method
+      puts number
+      end
+
+      a = 5
+      some_method(a)
+    
+    - ex: 
+      # Example of a method that modifies its argument permanently
+      # mutate.rb
+
+      a = [1, 2, 3]
+
+      def mutate(array)
+        array.pop
+      end
+
+      p "Before mutate method: #{a}"
+      mutate(a)
+      p "After mutate method: #{a}"
+
+  - RUBY is a PASS-BY-VALUE and PASS-BY-REFERENCE language.
+  - RUBY METHODS ALWAYS RETURN the evaluated result of the  last line of the expression unless an explicit return comes before it.
+# FLOW CONTROL
+  - ORDER OF PRECEDENCE
+    -<=, <, >, >= - Comparison
+    ==, != - Equality
+    && - Logical AND
+    || - Logical OR
+# LOOPS & ITERATORS
+  - The BREAK statement in a loop allows you to exit a loop.
+  - Any code after a BREAK statement will not be executed.
+  - BREAK only exits the loop and not the program.
+  - TYPES OF LOOPS
+    - loop do end
+    - while x > 0 
+      end
+        - returns nil
+    - until x < 0 
+      end
+    - loop do 
+      puts "Enter:"
+      if x != 'Y' 
+      break 
+      end 
+      end
+      - Runs once before conditional is evaluated
+    - for i in 1..x do 
+      put i 
+      end
+        - Returns a collection of elements after it executes.
+# ITERATORS
+  - names.each { |name| puts name } - for one line
+  - multi-line: names.each do |name|
+                  puts "#{x}. #{name}"
+                  x += 1
+                end
+  - RECURSION is the act of calling a method from within itself.
+  
